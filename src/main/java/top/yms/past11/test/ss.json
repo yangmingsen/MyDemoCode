@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "message": "查询成功",
+  "result": [
+    {
+      "status": 1,
+      "activityCode": "128723949234K-1",
+      "creator": "杨铭森",
+      "createdTime": "2020-06-21",
+      "simpleProductNo": "1B342、1B345、4K34...",
+      "supplierNum": 20
+    },
+    {
+      "status": 2,
+      "activityCode": "128723949234K-2",
+      "creator": "杨铭森",
+      "createdTime": "2020-06-22",
+      "simpleProductNo": "1B342、1B345、4K34...",
+      "supplierNum": 40
+    },
+    {
+      "status": 3,
+      "activityCode": "128723949234K-3",
+      "creator": "杨铭森",
+      "createdTime": "2020-06-23",
+      "simpleProductNo": "1B342、1B345、4K34...",
+      "supplierNum": 60
+    },
+    {
+      "status": 4,
+      "activityCode": "128723949234K-4",
+      "creator": "杨铭森",
+      "createdTime": "2020-06-24",
+      "simpleProductNo": "1B342、1B345、4K34...",
+      "supplierNum": 80
+    }
+  ]
+}
