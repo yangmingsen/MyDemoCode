@@ -39,7 +39,7 @@ public class Code001 {
             }
         }
         if (ni <= 1) return true;
-        if (ni == 2 && newArr[0]==newArr[1])return true;
+        if (ni == 2 && newArr[0]==newArr[1]) return true;
         return check(newArr,ni);
     }
 

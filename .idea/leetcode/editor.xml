@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LeetcodeEditor">
+    <option name="projectConfig">
+      <map>
+        <entry key="$USER_HOME$/AppData/Local/Temp/leetcode/editor/cn/[14]最长公共前缀.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$USER_HOME$/AppData/Local/Temp/leetcode/editor/cn/[14]最长公共前缀.java" />
+              <option name="questionId" value="14" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="D:/tmp/LeetCodeTmp/leetcode/editor/cn/[125]验证回文串.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="D:/tmp/LeetCodeTmp/leetcode/editor/cn/[125]验证回文串.java" />
+              <option name="questionId" value="125" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="D:/tmp/LeetCodeTmp/leetcode/editor/cn/[144]二叉树的前序遍历.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="D:/tmp/LeetCodeTmp/leetcode/editor/cn/[144]二叉树的前序遍历.java" />
+              <option name="questionId" value="144" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

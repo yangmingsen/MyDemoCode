@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../Scala/Play/play-scala" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Scala/Play/play-scala-hello-world-tutorial" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Scala/Play/play-scala-rest-api-example" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Scala/Play/play-scala-starter-example" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Scala/Play/playscalademo" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../Scala/play-scala-starter-example" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="ScalaSbtSettings">
+    <option name="customLauncherEnabled" value="true" />
+    <option name="customLauncherPath" value="E:\env\sbt\bin\sbt-launch.jar" />
+    <option name="customVMEnabled" value="true" />
+    <option name="customVMPath" value="E:/java" />
+    <option name="vmParameters" value="-Xmx512M  -XX:MaxPermSize=256m  -XX:ReservedCodeCacheSize=128m  -Dsbt.log.format=true  -Dsbt.boot.directory=D:/sbtRepo/boot/ -Dsbt.global.base=D:/sbtRepo/.sbt -Dsbt.ivy.home=D:/sbtRepo/.ivy2 -Dsbt.repository.config=E:/env/sbt/conf/huaweiyun-repositories -Dsbt.repository.secure=false" />
+  </component>
+</project>
