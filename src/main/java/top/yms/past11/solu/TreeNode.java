@@ -1,11 +1,12 @@
 package top.yms.past11.solu;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 public class TreeNode {
-    public Integer val;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode(int x) { val = x; left=right=null;}
@@ -21,6 +22,29 @@ public class TreeNode {
             root = insert(list.get(i), root);
         }
     }
+
+    public void printForLevelTree(TreeNode root) {
+        if (root == null) return;
+        List<TreeNode> queue = new ArrayList<>();
+        queue.add(root);
+
+        while (true) {
+          int len = queue.size();
+          if (len == 0) return;
+          List<TreeNode> q2 = new ArrayList<>();
+          for(int i=0; i<len; i++) {
+              TreeNode treeNode = queue.get(i);
+              if (treeNode.left != null) q2.add(treeNode.left);
+              if (treeNode.right != null) q2.add(treeNode.right);
+              System.out.print(treeNode.val+" ");
+          }
+            System.out.println();
+          queue = q2;
+
+        }
+
+    }
+
 
     public TreeNode insert(Integer ele, TreeNode root) {
         if (ele == null) return root;

@@ -49,11 +49,20 @@ public class Code002 {
         objects.add(4);
         objects.add(8);
         objects.add(10);
+        objects.add(-20);
+        objects.add(2);
+        objects.add(3);
+        objects.add(5);
+        objects.add(7);
+        objects.add(9);
+        objects.add(10);
+        objects.add(11);
+
 
         TreeNode treeNode = new TreeNode(objects);
 
-        System.out.println(code66.preorderTraversal(treeNode.root));
-
+//        System.out.println(code66.preorderTraversal(treeNode.root));
+        treeNode.printForLevelTree(treeNode.root);
 
         // code66.inOrder2(root);
 
