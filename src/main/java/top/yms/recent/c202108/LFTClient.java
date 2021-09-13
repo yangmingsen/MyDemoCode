@@ -51,12 +51,16 @@ public class LFTClient {
             int current = finshNum.get();
             int total = totalNum;
 
+            int len = current - last;
+            last = current;
+
             double percent = (current * 1.0d / total) * 100;
+
 
             for(int i=0; i<(int)(percent)/2; i++) {
                 tmpStr.append("#");
             }
-            System.out.printf("\r总进度[%-50s] => %.2f%%",tmpStr.toString(), percent);
+            System.out.printf("\r总进度[%-50s] => %.2f%% => %s个文件/s",tmpStr.toString(), percent, len+"");
             if (current >= total) {
                 break;
             }

@@ -16,18 +16,16 @@ public class LFTServer {
         String separator = File.separator;
 
         StringBuilder tmpStr = new StringBuilder();
-
+        String[] split = null;
         if (path.indexOf("\\") > 0) {
-            String[] split = path.split("\\\\");
-            for(String tt : split) {
-                tmpStr.append(tt).append(separator);
-            }
+            split = path.split("\\\\");
         } else {
-            String[] split = path.split("/");
-            for(String tt : split) {
-                tmpStr.append(tt).append(separator);
-            }
+            split = path.split("/");
         }
+        for(String tt : split) {
+            tmpStr.append(tt).append(separator);
+        }
+
         return tmpStr.toString();
     }
 
@@ -207,19 +205,9 @@ public class LFTServer {
             System.out.println("接收到Client：" + accept.getRemoteSocketAddress().toString()+" 请求类型：" + rMsg);
 
             if (rMsg.equals("d")) {
-                executorService.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        doDirHandler(accept);
-                    }
-                });
+                executorService.execute(() -> doDirHandler(accept));
             } else if (rMsg.equals("f")) {
-                executorService.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        doFileHandler(accept);
-                    }
-                });
+                executorService.execute(() -> doFileHandler(accept));
             } else {
                 throw new Exception("非法字符");
             }
