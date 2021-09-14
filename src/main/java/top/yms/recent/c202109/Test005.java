@@ -9,10 +9,13 @@ public class Test005 {
 
     public static void main(String[] args) throws Exception{
 
-        String filePath = "G:\\Project\\Go\\MyTools\\network\\ysend\\ysend.go";
-        File file = new File(filePath);
-        long length = file.length();
-        System.out.println("file="+length);
+        String 文件路径 = "G:\\Project\\Go\\MyTools\\network\\ysend\\ysend.go";
+        File 文件 = new File(文件路径);
+
+        long 文件长度 = 文件.length();
+
+        System.out.println("文件长度="+文件长度);
+
 
     }
 }
