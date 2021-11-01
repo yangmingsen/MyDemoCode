@@ -74,5 +74,9 @@ public class Code9 {
         inOrderLoop(root);
         System.out.println();
         preOrderLoop(root);
+        System.out.println();
+
+        treeNode.printForLevelTree();
+
     }
 }

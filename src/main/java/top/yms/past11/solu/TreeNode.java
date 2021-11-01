@@ -2,6 +2,7 @@ package top.yms.past11.solu;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -23,24 +24,29 @@ public class TreeNode {
         }
     }
 
+    public void printForLevelTree() {
+        printForLevelTree(this.root);
+    }
+
+    /**
+     * 层级遍历
+     * @param root
+     */
     public void printForLevelTree(TreeNode root) {
         if (root == null) return;
-        List<TreeNode> queue = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (true) {
           int len = queue.size();
           if (len == 0) return;
-          List<TreeNode> q2 = new ArrayList<>();
           for(int i=0; i<len; i++) {
-              TreeNode treeNode = queue.get(i);
-              if (treeNode.left != null) q2.add(treeNode.left);
-              if (treeNode.right != null) q2.add(treeNode.right);
+              TreeNode treeNode =  queue.pop();
+              if (treeNode.left != null) queue.add(treeNode.left);
+              if (treeNode.right != null) queue.add(treeNode.right);
               System.out.print(treeNode.val+" ");
           }
             System.out.println();
-          queue = q2;
-
         }
 
     }
@@ -63,6 +69,10 @@ public class TreeNode {
         return root;
     }
 
+    /**
+     * 前序遍历 非递归版
+     * @param node
+     */
     public void preOrderLoop(TreeNode node) {
         Stack<TreeNode> stack  = new Stack<>();
         stack.push(null);
@@ -77,6 +87,10 @@ public class TreeNode {
         }
     }
 
+    /**
+     * 前序遍历 非递归版
+     * @param node
+     */
     public void preOrderLoop2(TreeNode node) {
         Stack<TreeNode> stack  = new Stack<>();
         while (node !=null || !stack.isEmpty()) {
@@ -92,6 +106,10 @@ public class TreeNode {
         }
     }
 
+    /**
+     * 中序遍历 非递归版
+     * @param node
+     */
     public void inOrderLoop(TreeNode node) {
         Stack<TreeNode> stack  = new Stack<>();
         while (node !=null || !stack.isEmpty()) {
@@ -108,6 +126,10 @@ public class TreeNode {
     }
 
 
+    /**
+     * 后序遍历 非递归版
+     * @param node
+     */
     public void postOrderLoop(TreeNode node) {
         Stack<TreeNode> stack  = new Stack<>();
         TreeNode cur = null;
@@ -136,7 +158,10 @@ public class TreeNode {
         System.out.print(node.val+", ");
     }
 
-
+    /**
+     * 前序遍历 递归版
+     * @param node
+     */
     public void preOrder(TreeNode node) {
         if (node != null) {
             showData(node);
@@ -146,6 +171,10 @@ public class TreeNode {
     }
 
 
+    /**
+     * 中序遍历 递归版
+     * @param node
+     */
     public void inOrder(TreeNode node) {
         if (node != null) {
             inOrder(node.left);
@@ -155,6 +184,10 @@ public class TreeNode {
     }
 
 
+    /**
+     * 后序遍历 递归版
+     * @param node
+     */
     public void postOrder(TreeNode node) {
         if (node != null) {
             postOrder(node.left);

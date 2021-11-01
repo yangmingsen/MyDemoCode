@@ -129,6 +129,7 @@ public class LFTClient {
 
         //建立Socket Connection
         Socket cs = new Socket(remoteIp, port);
+
         OutputStream os = cs.getOutputStream();
         InputStream is = cs.getInputStream();
 

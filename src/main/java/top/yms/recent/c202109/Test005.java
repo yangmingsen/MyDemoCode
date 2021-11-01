@@ -2,6 +2,8 @@ package top.yms.recent.c202109;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Test005 {
 
@@ -9,12 +11,13 @@ public class Test005 {
 
     public static void main(String[] args) throws Exception{
 
-        String 文件路径 = "G:\\Project\\Go\\MyTools\\network\\ysend\\ysend.go";
-        File 文件 = new File(文件路径);
+        ReentrantLock lock = new ReentrantLock();
 
-        long 文件长度 = 文件.length();
+        //dostome
+        lock.lock();
 
-        System.out.println("文件长度="+文件长度);
+        lock.unlock();
+
 
 
     }
