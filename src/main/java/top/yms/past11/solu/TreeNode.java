@@ -29,7 +29,7 @@ public class TreeNode {
     }
 
     /**
-     * 层级遍历
+     * 按层级遍历
      * @param root
      */
     public void printForLevelTree(TreeNode root) {

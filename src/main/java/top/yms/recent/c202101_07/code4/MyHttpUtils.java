@@ -32,9 +32,12 @@ public class MyHttpUtils {
         HttpPost httpPost = new HttpPost(url);
 
         //构建header
-        for(Map.Entry<String, String> headerEntry : header.entrySet()) {
-            httpPost.setHeader(headerEntry.getKey(), headerEntry.getValue());
+        if (header != null) {
+            for(Map.Entry<String, String> headerEntry : header.entrySet()) {
+                httpPost.setHeader(headerEntry.getKey(), headerEntry.getValue());
+            }
         }
+
         httpPost.setHeader("Content-Type", "application/json");
 
         // 组织数据
@@ -212,15 +215,17 @@ public class MyHttpUtils {
         CloseableHttpResponse httpResponse = doPostByJson(url, header, jsonStr);
 
         String statusLine = httpResponse.getStatusLine().toString();
-        System.out.println(statusLine+"\n"+"hello world");
+
+        StringBuilder tmpStr = new StringBuilder();
+
+        //System.out.println(statusLine+"\n"+"hello world");
 
         // 从响应模型中获取响应实体
 
         HttpEntity responseEntity = httpResponse.getEntity();
         if (statusLine != null) {
             if (statusLine.indexOf("200") > 0) {
-                System.out.println(statusLine+"\n"+"hello world");
-
+                tmpStr.append(statusLine).append("|");
             } else {
                 //
                 //doPostByJson(url, header, jsonStr);
@@ -228,11 +233,13 @@ public class MyHttpUtils {
         }
 
         if (responseEntity != null) {
-            System.out.println("响应内容长度为:" + responseEntity.getContentLength());
-            System.out.println("响应内容为:" + EntityUtils.toString(responseEntity));
+          //  System.out.println("响应内容长度为:" + responseEntity.getContentLength());
+           // tmpStr.append("响应内容为:").append(EntityUtils.toString(responseEntity)).append("|");
+            String resJson = EntityUtils.toString(responseEntity);
+            return resJson;
         }
 
-        return statusLine;
+        return tmpStr.toString();
     }
 
 
