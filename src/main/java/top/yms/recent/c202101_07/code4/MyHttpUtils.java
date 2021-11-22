@@ -216,19 +216,12 @@ public class MyHttpUtils {
 
         String statusLine = httpResponse.getStatusLine().toString();
 
-        StringBuilder tmpStr = new StringBuilder();
-
-        //System.out.println(statusLine+"\n"+"hello world");
-
-        // 从响应模型中获取响应实体
-
         HttpEntity responseEntity = httpResponse.getEntity();
         if (statusLine != null) {
             if (statusLine.indexOf("200") > 0) {
-                tmpStr.append(statusLine).append("|");
+
             } else {
-                //
-                //doPostByJson(url, header, jsonStr);
+
             }
         }
 
@@ -239,7 +232,7 @@ public class MyHttpUtils {
             return resJson;
         }
 
-        return tmpStr.toString();
+        return null;
     }
 
 

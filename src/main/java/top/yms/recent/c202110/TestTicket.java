@@ -22,7 +22,7 @@ public class TestTicket {
 
     private static CountDownLatch latch = new CountDownLatch(threadNum);
 
-    private static final String url = "http://localhost:8080/order/ticket2";
+    private static final String url = "http://10.22.84.12:8080/order/ticket";
 
     static class RunTask implements Runnable {
 
@@ -46,10 +46,10 @@ public class TestTicket {
 
 
 
-            int taskNum = 10;
+            int taskNum = 20;
             CountDownLatch latch1 = new CountDownLatch(taskNum);
 
-            for(int i=1; i<=10; i++) {
+            for(int i=1; i<=20; i++) {
                 TicketRequest ticketRequest = new TicketRequest();
                 ticketRequest.setRequestName(name);
                 ticketRequest.setSeatId("15A"+ i);

@@ -1,11 +1,13 @@
 package top.yms.past11.solu;
 
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * 二叉搜索树 简易实现
+ */
 public class TreeNode {
     public int val;
     public TreeNode left;
@@ -13,19 +15,37 @@ public class TreeNode {
     public TreeNode(int x) { val = x; left=right=null;}
 
     int size = 0;
+
+    @Deprecated //不再使用
     public TreeNode root;
+
+    public TreeNode(int [] arr) {
+        this.init(arr);
+    }
 
     public TreeNode(List<Integer> list) {
         if (list.size() == 0) return;
-        root = new TreeNode(list.get(0));
-        int len = list.size();
-        for(int i=1; i<len; i++) {
-            root = insert(list.get(i), root);
+        int [] arr = new int[list.size()];
+        for(int i=0; i<list.size(); i++) {
+            arr[i] = list.get(i);
         }
+        this.init(arr);
+    }
+
+    private void init(int [] arr) {
+        if (arr == null || arr.length ==0) return;
+        TreeNode root = new TreeNode(arr[0]);
+        int len = arr.length;
+        for(int i=1; i<len; i++) {
+            root = insert(arr[i], root);
+        }
+        this.val = root.val;
+        this.left = root.left;
+        this.right = root.right;
     }
 
     public void printForLevelTree() {
-        printForLevelTree(this.root);
+        printForLevelTree(this);
     }
 
     /**
@@ -69,6 +89,9 @@ public class TreeNode {
         return root;
     }
 
+    public void preOrderLoop() {
+        preOrderLoop(this);
+    }
     /**
      * 前序遍历 非递归版
      * @param node
@@ -87,6 +110,9 @@ public class TreeNode {
         }
     }
 
+    public void preOrderLoop2() {
+        this.preOrderLoop2(this);
+    }
     /**
      * 前序遍历 非递归版
      * @param node
@@ -106,6 +132,9 @@ public class TreeNode {
         }
     }
 
+    public void inOrderLoop() {
+        inOrderLoop(this);
+    }
     /**
      * 中序遍历 非递归版
      * @param node
@@ -125,6 +154,9 @@ public class TreeNode {
         }
     }
 
+    public void postOrderLoop() {
+        postOrderLoop(this);
+    }
 
     /**
      * 后序遍历 非递归版
@@ -158,6 +190,9 @@ public class TreeNode {
         System.out.print(node.val+", ");
     }
 
+    public void preOrder() {
+        preOrder(this);
+    }
     /**
      * 前序遍历 递归版
      * @param node
@@ -170,6 +205,9 @@ public class TreeNode {
         }
     }
 
+    public void inOrder() {
+        inOrder(this);
+    }
 
     /**
      * 中序遍历 递归版
@@ -184,6 +222,9 @@ public class TreeNode {
     }
 
 
+    public void postOrder() {
+        postOrder(this);
+    }
     /**
      * 后序遍历 递归版
      * @param node
