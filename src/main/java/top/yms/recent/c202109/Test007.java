@@ -25,20 +25,14 @@ public class Test007 {
 
 
     public static List<Section> compSection(long total, int core) {
-//        for(;;core++) {
-//            if (total%core == 0) {
-//                System.out.println("core="+core+", avg="+total/core);
-//                break;
-//            }
-//        }
+
         long avg = total/core;
-        System.out.println("avg="+avg);
         long sp = 0;
 
         List<Section> list = new ArrayList<>();
         for(int i=0; i<core; i++) {
-            if (sp+avg < total) {
-                list.add(new Section(sp,sp+avg-1));
+            if (i+1!=core) {
+                list.add(new Section(sp,sp+avg));
                 sp = sp+avg;
             } else {
                 list.add(new Section(sp, sp+(total-sp)));
