@@ -3,6 +3,7 @@ package top.yms.recent.c202101_07.code4;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
+import top.yms.utils.MyHttpUtils;
 
 import java.io.IOException;
 import java.util.HashMap;

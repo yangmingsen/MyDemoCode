@@ -2,7 +2,7 @@ package top.yms.recent.c202110;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import top.yms.recent.c202101_07.code4.MyHttpUtils;
+import top.yms.utils.MyHttpUtils;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

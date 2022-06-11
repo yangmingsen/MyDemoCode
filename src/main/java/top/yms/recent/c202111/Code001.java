@@ -2,6 +2,11 @@ package top.yms.recent.c202111;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Code001 {
 
     static class MyCode {
@@ -37,6 +42,16 @@ public class Code001 {
 
         System.out.println(strs);
 
+    }
+
+    @Test
+    public void doTheTest() throws ParseException {
+        String dt = "20211206";
+//        Date date = new Date(dt);
+//        System.out.println(date);
+        Date yyyymmdd = new SimpleDateFormat("YYYYMMDD").parse(dt);
+        System.out.println(yyyymmdd.toString());
+        System.out.println(new SimpleDateFormat("YYYYMMDD").parse(dt).toString());
     }
 
 }

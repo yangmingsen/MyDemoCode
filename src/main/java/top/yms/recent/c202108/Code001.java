@@ -1,6 +1,8 @@
 package top.yms.recent.c202108;
 
 
+import top.yms.utils.ListNode;
+
 import java.util.Arrays;
 
 public class Code001 {

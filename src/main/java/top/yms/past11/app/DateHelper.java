@@ -1,5 +1,6 @@
 package top.yms.past11.app;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,6 +13,34 @@ public class DateHelper {
     private static final String PATTERN4 = "yyyy-MM-dd HH:mm:ss";
     private static final String PATTERN5 = "yyyy.MM.dd HH:mm:ss";
     private static final String PATTERN6 = "yyyy年MM月dd日HH时";
+
+
+
+    /**
+     * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
+     *
+     * @param strDate
+     * @return
+     */
+    public static Date strToDateTime(String strDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(strDate, pos);
+        return strtodate;
+    }
+
+    public static void main(String[] args) {
+        String str = "2018-04-02 00:00:00";
+        System.out.println(strToDateTime(str));
+    }
+
+
+    public static String getDateStr(Date date) {
+        if (date == null) return " ";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN4);
+        String timeStampStr = simpleDateFormat.format(date);
+        return timeStampStr;
+    }
 
 
     private static String match(String pattern) {

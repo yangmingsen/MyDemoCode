@@ -1,7 +1,7 @@
 package top.yms.recent.c202111;
 
 import org.junit.jupiter.api.Test;
-import top.yms.past11.id.IdWorker;
+import top.yms.utils.IdWorker;
 
 public class TestIdWorker {
 

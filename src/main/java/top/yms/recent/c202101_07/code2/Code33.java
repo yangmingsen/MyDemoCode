@@ -9,16 +9,19 @@ public class Code33 {
     static LinkedHashMap<String, String> get() {
         LinkedHashMap<String, String> llmap = new LinkedHashMap<>(10,0.75f,true);
 
-        llmap.put("22x34","23423sdf");
-        llmap.put("2a34","23423sdf");
-        llmap.put("a2s34","23423sdf");
+        llmap.put("A","1");
+        llmap.put("B","2");
+        llmap.get("A");
+        llmap.put("C","3");
+        llmap.get("B");
 
         return llmap;
     }
 
     public static void main(String[] args) {
         LinkedHashMap<String, String> linkedHashMap = get();
-        linkedHashMap.put("2a34","yangmingsen");
+        linkedHashMap.put("D","4");
+        linkedHashMap.get("B");
         Set<Map.Entry<String, String>> entries = linkedHashMap.entrySet();
 
         for(Map.Entry<String, String> entry : entries) {

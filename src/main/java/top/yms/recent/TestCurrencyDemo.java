@@ -1,7 +1,7 @@
 package top.yms.recent;
 
 import com.google.gson.Gson;
-import top.yms.recent.c202101_07.code4.MyHttpUtils;
+import top.yms.utils.MyHttpUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

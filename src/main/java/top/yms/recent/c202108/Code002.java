@@ -1,6 +1,6 @@
 package top.yms.recent.c202108;
 
-import top.yms.past11.solu.TreeNode;
+import top.yms.utils.TreeNode;
 
 public class Code002 {
     public boolean isSubStructure(TreeNode A, TreeNode B) {

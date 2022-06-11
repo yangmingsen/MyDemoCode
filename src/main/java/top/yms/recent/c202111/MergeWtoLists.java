@@ -17,9 +17,7 @@ package top.yms.recent.c202111;
 //leetcode submit region begin(Prohibit modification and deletion)
 
 import org.junit.jupiter.api.Test;
-import top.yms.recent.c202108.ListNode;
-
-import java.util.List;
+import top.yms.utils.ListNode;
 
 /**
  * Definition for singly-linked list.

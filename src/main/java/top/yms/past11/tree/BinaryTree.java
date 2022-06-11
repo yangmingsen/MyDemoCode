@@ -1,6 +1,6 @@
 package top.yms.past11.tree;
 
-import top.yms.past11.solu.TreeNode;
+import top.yms.utils.TreeNode;
 
 import java.util.ArrayList;
 

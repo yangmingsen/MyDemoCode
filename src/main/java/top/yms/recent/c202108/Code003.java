@@ -1,6 +1,6 @@
 package top.yms.recent.c202108;
 
-import top.yms.past11.solu.TreeNode;
+import top.yms.utils.TreeNode;
 
 public class Code003 {
     public boolean isSymmetric(TreeNode root) {
