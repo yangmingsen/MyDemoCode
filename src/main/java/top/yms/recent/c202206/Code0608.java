@@ -113,9 +113,14 @@ public class Code0608 {
 
     @Test
     public void dd() {
-        String ss = "支出";
-        System.out.println(ss.contains("支出"));
+
+        String sss ="alipay_record_20220607_191433.xlsx";
+        String[] split = sss.split("\\.");
+        System.out.println(split[0]);
+
     }
+
+
 
 
 

@@ -1006,20 +1006,196 @@ public class ExcelImport1 {
 
         }
 
-        //mapPrint(expendMap);
+        mapPrint(expendMap);
         //mapPrint(incomeMap);
         //mapPrint2(otherExpendMap);
         //mapPrint2(tmpExpendMap);
 
-        doAliRecordToDb(expendMap, incomeMap, tmpExpendMap, otherExpendMap);
+        //doAliRecordToDb(expendMap, incomeMap, tmpExpendMap, otherExpendMap);
+
+    }
+
+
+    public static void wxMapPrint(Map<String, WxExpend> map) {
+        for (Map.Entry<String, WxExpend> entry : map.entrySet()) {
+            System.out.println(entry.getValue());
+        }
+    }
+
+    public static PreparedStatement getPst(WxExpend wxExpend, String sql) throws Exception{
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, wxExpend.getOrderId());
+        pst.setString(2, wxExpend.getCounterparty());
+        pst.setString(3, wxExpend.getTitle());
+        pst.setString(4, wxExpend.getPaymentMethod());
+        pst.setBigDecimal(5, wxExpend.getAmount());
+        pst.setString(6, wxExpend.getCategory());
+        pst.setTimestamp(7, new Timestamp(wxExpend.getTxTime().getTime()));
+
+        return pst;
+    }
+
+    public static void doWxRecordToDb(Map<String, WxExpend> expendMap, Map<String, WxExpend> incomeMap,
+                                        Map<String, WxExpend> otherMap ) {
+        System.out.println("开始输出到Db");
+        String expendSql = "INSERT INTO `dbtest2`.`wx_expend`(`id`, `counterparty`, `title`, `payment_method`, `amount`, `category`, `tx_time`) VALUES (?,?,?,?,?,?,?)";
+        String incomeSql = "INSERT INTO `dbtest2`.`wx_income`(`id`, `counterparty`, `title`, `payment_method`, `amount`, `category`, `tx_time`) VALUES (?,?,?,?,?,?,?)";
+        String otherSql = "INSERT INTO `dbtest2`.`wx_expend_other`(`id`, `counterparty`, `title`, `payment_method`, `amount`, `category`, `tx_time`) VALUES (?,?,?,?,?,?,?)";
+
+        try {
+
+            expendMap.forEach( (x, y) -> {
+                try {
+                    PreparedStatement pst = getPst(y, expendSql);
+                    pst.executeUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+            });
+
+            incomeMap.forEach( (x, y) -> {
+                try {
+                    PreparedStatement pst = getPst(y, incomeSql);
+                    pst.executeUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+            });
+
+
+            otherMap.forEach((x,y) -> {
+                try {
+                    PreparedStatement pst = getPst(y, otherSql);
+                    //pst.setString(8, y.getTxStatus());
+                    pst.executeUpdate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
+            });
+
+
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("输出到Db完毕...");
+
+    }
+
+    private static WxExpend parseWXCells(Cell [] cells, WxExpend wxExpend) throws Exception {
+        Cell cell0 = cells[0];
+        Cell cell1 = cells[1];
+        Cell cell2 = cells[2];
+        Cell cell3 = cells[3];
+        Cell cell4 = cells[4];
+        Cell cell5 = cells[5];
+        Cell cell6 = cells[6];
+        Cell cell7 = cells[7];
+        Cell cell8 = cells[8];
+        //Cell cell9 = row.getCell(9);
+        Cell cell10 = cells[10];
+
+        wxExpend.setOrderId(getCellStr(cell8));
+        wxExpend.setCounterparty(getCellStr(cell2));
+        wxExpend.setTitle(getCellStr(cell3));
+        wxExpend.setPaymentMethod(getCellStr(cell6));
+        wxExpend.setCategory(getCellStr(cell1));
+
+        Date expendTime = getDateTime(POIExcelUtil.getCellValueByCell(cell0));
+        wxExpend.setTxTime(expendTime);
+
+        //交易金额判断
+        String amountStr = getCellStr(cell5);
+        if (StringUtils.isBlank(amountStr)) {
+            throw new Exception("订单号[" + wxExpend.getOrderId() + "] 金额为空");
+        }
+        try {
+            new Double(amountStr);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        wxExpend.setAmount(new BigDecimal(amountStr));
+
+        return wxExpend;
+
+    }
+
+    public static void toWxExpend(Cell [] cells, Map<String, WxExpend> map) throws Exception {
+        WxExpend wxExpend = new WxExpend();
+        parseWXCells(cells, wxExpend);
+        map.put(wxExpend.getOrderId(), wxExpend);
+    }
+
+    public static void toWxIncome(Cell [] cells, Map<String, WxExpend> map) throws Exception {
+        toWxExpend(cells, map);
+    }
+
+    public static void toWxExpendOther(Cell [] cells, Map<String, WxExpend> map) throws Exception {
+        toWxExpend(cells, map);
+    }
+
+    private static final String INCOME = "收入";
+    private static final String EXPEND = "支出";
+
+    public static void doParseWXRecord(Workbook workbook, String seq) throws Exception {
+        Map<String, WxExpend> expendMap = new HashMap<>();
+        Map<String, WxExpend> incomeMap = new HashMap<>();
+        Map<String, WxExpend> otherMap = new HashMap<>();
+
+        String sheetName = "微信支付账单("+seq+")";
+        Sheet sheet = workbook.getSheet(sheetName);
+        if (sheet == null) throw new Exception(sheetName + " 未找到");
+
+        int totalRows = sheet.getPhysicalNumberOfRows();
+        // ali的从第3行开始
+        for (int i = 17; i < totalRows; i++) {
+            Row row = sheet.getRow(i);//拿到某一行
+
+            //0=>交易时间, 1=>交易类型, 2=>交易对方, 3=>商品, 4=>收/支, 5=> 金额(元)
+            //6=>支付方式, 7=>当前状态, 8=>交易单号, 9=> ...., 10=>备注
+
+            //收支方式
+            String inOrOut = getCellStr(row.getCell(4));
+            if (StringUtils.isBlank(inOrOut)) break;
+
+            Cell[] cells = new Cell[11];
+            for (int j = 0; j < 11; j++) {
+                cells[j] = row.getCell(j);
+            }
+
+            if (inOrOut.contains(INCOME)) {
+                toWxIncome(cells, incomeMap);
+            } else if (inOrOut.contains(EXPEND)) {
+                toWxExpend(cells, expendMap);
+            } else {
+                toWxExpendOther(cells, otherMap);
+            }
+
+        }
+
+        //wxMapPrint(expendMap);
+        //wxMapPrint(incomeMap);
+        //wxMapPrint(otherMap);
+
+        //doWxRecordToDb(expendMap, incomeMap, otherMap);
+
 
     }
 
 
     public static void main(String[] args) throws Exception {
-        String fileName = "C:\\Users\\yangmingsen\\Desktop\\test_record\\alipay_record_20220607_191433.xlsx";
-        Workbook workbook = POIExcelUtil.getWorkbook(new FileInputStream(fileName), fileName);
+        String aliFileName = "C:\\Users\\yangmingsen\\Desktop\\test_record\\alipay_record_20220607_191433.xlsx";
+        String wxFileName = "C:\\Users\\yangmingsen\\Desktop\\test_record\\wx-recored(20220304-20220531).xlsx";
+        Workbook workbook = POIExcelUtil.getWorkbook(new FileInputStream(aliFileName), aliFileName);
         try {
+            String seq = "20220304-20220531";
             doParseAliRecord(workbook);
         } catch (Exception e) {
             e.printStackTrace();
